@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clicker M2A2</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+  <div class="three-columns">
+    
+    <section class="column col-1">
+      <h2>Clicker 🎯</h2>
+      <div class="wrap">
+        <div class="card">
+          <div class="topbar">
+            <div class="stats">
+              <div class="stat">CPS: <span id="cps">0</span></div>
+              <div class="stat">Power: <span id="power">1</span></div>
+            </div>
+          </div>
+
+          <div class="score" id="score">0</div>
+
+          <div class="cookie-area">
+            <div class="cookie" id="cookie" role="button" aria-pressed="false" aria-label="Cliquer">
+              <div class="click-text">CLIQUE</div>
+            </div>
+          </div>
+          <div class="controls">
+            <button class="btn" id="saveBtn">Sauvegarder</button>
+            <button class="btn" id="resetBtn">Reset</button>
+            <button class="btn" id="exportBtn">Exporter JSON</button>
+            <button class="btn" id="importBtn">Importer JSON</button>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="small muted">Astuce : tu gagnes automatiquement avec les autoclickers. La progression est sauvegardée localement.</div>
+        </div> 
+      </div> 
+    </section> <section class="column col-2">
+      <h2>Réalisations 🏆</h2>
+      <div class="achievements-grid" id="achievements-container">
+        </div>
+    </section> <section class="column col-3">
+      <h2>Boutique 🛒</h2>
+      <aside class="card">
+        <div class="shop" id="shop">
+          </div>
+
+        <div class="sep"></div>
+
+        <div class="small muted">INFORMATIONS</div>
+        <div class="small">Score total : <span id="totalEarned">0</span></div>
+        <div class="small">Dernière sauvegarde : <span id="lastSave">—</span></div>
+      </aside>
+    </section> </div> <div id="toast" class="toast" style="display:none"></div>
+  
+  <button id="theme-switcher" class="theme-switcher" aria-label="Changer le thème">☀️</button>
+  
+  <script src="script.js"></script>
+</body>
+</html>
