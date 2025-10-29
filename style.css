@@ -1,0 +1,442 @@
+/* 1. Variables */
+:root {
+  --gap: 16px;
+  /* Thème Clair (utilisé par .column) */
+  --bg1: #f8f9fb;
+  --bg2: #ffffff;
+  --bg3: #f4f6f8;
+  /* Thème Sombre/Glass (utilisé par .card et les composants) */
+  --bg: #0f1724;
+  --card: #111827;
+  --accent: #ffb347;
+  --muted: #9aa6b2;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-2: rgba(255, 255, 255, 0.02);
+
+  /* THÈME */
+  --body-bg: #e9eef3;
+  --column-border: rgba(0, 0, 0, 0.06);
+  --text-color: #111827; /* Couleur de texte principale */
+  --h2-color: #111827;
+}
+
+/* 2. Styles Globaux */
+* {
+  box-sizing: border-box;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  /* L'arrière-plan principal est mis sur le body pour couvrir tout l'écran */
+  background: var(--body-bg);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+h2 {
+  text-align: center;
+  color: var(--h2-color);
+  transition: color 0.3s;
+}
+
+/* 3. Layout principal (Système .three-columns) */
+.three-columns {
+  display: grid;
+  grid-template-columns: 400px 1fr 400px;
+  gap: var(--gap);
+  min-height: 100vh;
+  padding: var(--gap);
+}
+
+.column {
+  background: var(--bg2); /* Fond clair */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  overflow: auto;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.col-1 { background: var(--bg1); }
+.col-2 { background: var(--bg2); }
+.col-3 { background: var(--bg3); }
+
+/* Ajout pour l'agencement de la colonne 2 */
+.column.col-2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.column + .column {
+  border-left: 1px solid var(--column-border);
+  padding-left: 19px;
+}
+
+/* Responsive du layout principal */
+@media (max-width: 800px) {
+  .three-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 4. Styles des Composants */
+.card {
+  /* Ce style sombre/glass s'affichera par-dessus les fonds clairs .col-1 et .col-3 */
+  background: linear-gradient(180deg, var(--glass), var(--glass-2));
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 18px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.stat {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.score {
+  font-size: 44px;
+  font-weight: 800;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.cookie-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.cookie {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000 70%);
+  box-shadow:
+    inset 0 4px 10px rgba(255, 255, 255, 0.3),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.6),
+    0 6px 10px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cookie:active {
+  transform: translateY(8px);
+  box-shadow:
+    inset 0 2px 6px rgba(255, 255, 255, 0.2),
+    inset 0 -6px 10px rgba(0, 0, 0, 0.8),
+    0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.cookie img {
+  width: 70%;
+  height: 70%;
+}
+
+.click-text {
+  font-weight: 700;
+  color: #1b1b1b;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, var(--accent), #ff7b4d);
+  color: #111;
+  border: none;
+  font-weight: 700;
+}
+
+.shop {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  align-items: center;
+}
+
+.item > .left {
+  display: flex;
+  flex-direction: column;
+}
+
+.item .name {
+  font-weight: 700;
+}
+
+.item .desc {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.item .price {
+  font-weight: 800;
+}
+
+.footer {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.small {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.sep {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.03);
+  margin: 12px 0;
+  border-radius: 2px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 22px;
+  background: #0b1220;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+  color: #dff3ff;
+}
+
+/* 5. Styles des Succès (Ajoutés) */
+
+.achievements-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center; /* MODIFIÉ: centre les icônes horizontalement */
+  align-content: center;   /* MODIFIÉ: centre les lignes d'icônes verticalement */
+  flex-grow: 1;            /* AJOUTÉ: la grille prend tout l'espace vertical restant */
+}
+
+.achievement {
+  width: 48px;
+  height: 48px;
+  background: var(--bg3); /* Fond clair */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  position: relative; /* Pour le tooltip */
+  cursor: help;
+  transition: all 0.2s ease;
+}
+
+/* Style pour un succès non débloqué */
+.achievement.locked {
+  background: var(--bg1);
+  color: #bbb;
+  filter: grayscale(80%);
+  opacity: 0.6;
+}
+
+/* Style pour un succès débloqué */
+.achievement.unlocked {
+  background: #fff;
+  border-color: #ffd700; /* Bordure dorée */
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* --- Système de Tooltip (Info-bulle) --- */
+
+.achievement[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 110%; /* Au-dessus de l'icône */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  background: var(--bg); /* Fond sombre (du thème .card) */
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: pre-wrap; /* Permet les sauts de ligne */
+  text-align: center;
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 10;
+  width: 200px; /* Largeur fixe pour le tooltip */
+  pointer-events: none; /* N'intercepte pas la souris */
+}
+
+.achievement[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.theme-switcher {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg2); /* Fond clair par défaut */
+  color: var(--text-color); /* Couleur de l'emoji */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* 7. Thème Sombre */
+html[data-theme="dark"] {
+  --body-bg: #0f1724;
+  --bg1: #1f2937;
+  --bg2: #111827; /* Les colonnes seront sombres */
+  --bg3: #1f2937;
+  --column-border: rgba(255, 255, 255, 0.06);
+  --text-color: #f8f9fb; /* Texte global clair */
+  --h2-color: #f8f9fb; /* Titres clairs */
+}
+
+/* Ajustements spécifiques au mode sombre */
+html[data-theme="dark"] .achievement.unlocked {
+  background: #1f2937; /* Utilise un fond sombre */
+  border-color: var(--accent); /* Utiliser la couleur accent */
+  box-shadow: 0 0 10px rgba(255, 179, 71, 0.5); /* Ombre assortie */
+}
+
+html[data-theme="dark"] .theme-switcher {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 8. Pop-up de Victoire */
+    
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08); /* Animation de zoom */
+  }
+}
+
+.victory-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75); /* Fond sombre semi-transparent */
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; /* Au-dessus de tout le reste */
+  cursor: pointer; /* Clic n'importe où pour fermer */
+}
+
+.victory-popup.hidden {
+  display: none;
+}
+
+.victory-content {
+  background: var(--card); /* Réutilise le style sombre des cartes */
+  color: #fff;
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--accent); /* Bordure dorée */
+  animation: pulse 2.5s infinite ease-in-out; /* Application de l'animation */
+  cursor: default; /* Le curseur normal sur la boîte */
+}
+
+.victory-content h2 {
+  font-size: 3rem; /* Gros titre */
+  color: var(--accent);
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.victory-content p {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.victory-content small {
+  display: block;
+  margin-top: 20px;
+  color: var(--muted);
+  font-style: italic;
+}
